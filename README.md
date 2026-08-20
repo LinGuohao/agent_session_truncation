@@ -2,6 +2,8 @@
 
 `session` extracts Codex or Claude JSONL history from a cutoff time without modifying the source file.
 
+It helps carry recent context between agents or accounts without importing the entire session history.
+
 ## Install
 
 Requires Python 3.11 or later.
