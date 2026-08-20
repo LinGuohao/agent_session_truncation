@@ -9,6 +9,7 @@ import time
 import unittest
 
 from session_truncation.config import load_config
+from session_truncation.cli import build_parser
 from session_truncation.timeparse import parse_cutoff
 from session_truncation.truncate import truncate_history
 
@@ -39,6 +40,14 @@ class TimeParsingTests(unittest.TestCase):
             parsed,
             datetime(2026, 8, 20, 16, 9, 25, tzinfo=timezone.utc),
         )
+
+
+class CliParsingTests(unittest.TestCase):
+    def test_unquoted_display_time_is_accepted(self) -> None:
+        args = build_parser().parse_args(
+            ["history.jsonl", "8/20/2026,", "6:33:11", "PM"]
+        )
+        self.assertEqual(" ".join(args.time), "8/20/2026, 6:33:11 PM")
 
 
 class TruncationTests(unittest.TestCase):

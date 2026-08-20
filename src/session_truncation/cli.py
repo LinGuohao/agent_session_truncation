@@ -18,6 +18,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("history", help="Codex 或 Claude JSONL 历史文件路径")
     parser.add_argument(
         "time",
+        nargs="+",
         help="起始时间（包含该秒），例如 '8/20/2026, 6:09:25 PM'",
     )
     parser.add_argument("--env-file", help="指定 env 配置文件")
@@ -36,7 +37,7 @@ def main(argv: list[str] | None = None) -> int:
             output_dir=args.output_dir,
             timezone_name=args.timezone,
         )
-        cutoff = parse_cutoff(args.time, config.timezone_name)
+        cutoff = parse_cutoff(" ".join(args.time), config.timezone_name)
         result = truncate_history(
             Path(args.history),
             cutoff,

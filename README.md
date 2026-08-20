@@ -15,7 +15,7 @@ python3 -m pip install -e .
 ## Usage
 
 ```bash
-session /path/to/history.jsonl '8/20/2026, 6:09:25 PM'
+session /path/to/history.jsonl 8/20/2026, 6:09:25 PM
 ```
 
 The source is copied to a temporary buffer, filtered, and written to the configured output directory. The buffer copy is then removed. Existing output files are never overwritten.
