@@ -8,9 +8,9 @@ import tempfile
 import time
 import unittest
 
-from seesion.config import load_config
-from seesion.timeparse import parse_cutoff
-from seesion.truncate import truncate_history
+from session_truncation.config import load_config
+from session_truncation.timeparse import parse_cutoff
+from session_truncation.truncate import truncate_history
 
 
 class TimeParsingTests(unittest.TestCase):
@@ -123,9 +123,9 @@ class ConfigTests(unittest.TestCase):
             root = Path(root_name)
             env_file = root / "custom.env"
             env_file.write_text(
-                "SEESION_BUFFER_DIR=cache\n"
-                "SEESION_OUTPUT_DIR=generated\n"
-                "SEESION_TIMEZONE=UTC\n"
+                "SESSION_TRUNCATION_BUFFER_DIR=cache\n"
+                "SESSION_TRUNCATION_OUTPUT_DIR=generated\n"
+                "SESSION_TRUNCATION_TIMEZONE=UTC\n"
             )
             config = load_config(env_file=str(env_file))
             self.assertEqual(config.buffer_dir, (root / "cache").resolve())

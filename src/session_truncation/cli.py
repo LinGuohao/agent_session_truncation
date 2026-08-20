@@ -12,7 +12,7 @@ from .truncate import truncate_history
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="seesion",
+        prog="session",
         description="复制并截取 Codex/Claude JSONL 历史，原文件保持不变。",
     )
     parser.add_argument("history", help="Codex 或 Claude JSONL 历史文件路径")

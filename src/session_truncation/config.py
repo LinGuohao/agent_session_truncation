@@ -70,16 +70,20 @@ def load_config(
     output_dir: str | None = None,
     timezone_name: str | None = None,
 ) -> Config:
-    selected_env = _find_env_file(env_file or os.environ.get("SEESION_ENV_FILE"))
+    selected_env = _find_env_file(
+        env_file or os.environ.get("SESSION_TRUNCATION_ENV_FILE")
+    )
     file_values = _read_env_file(selected_env) if selected_env else {}
     base_dir = selected_env.parent if selected_env else PROJECT_ROOT
 
     def setting(name: str, default: str) -> str:
         return os.environ.get(name, file_values.get(name, default))
 
-    buffer_raw = setting("SEESION_BUFFER_DIR", "./tmp")
-    output_raw = output_dir or setting("SEESION_OUTPUT_DIR", "~/Downloads")
-    tz_raw = timezone_name or setting("SEESION_TIMEZONE", "local")
+    buffer_raw = setting("SESSION_TRUNCATION_BUFFER_DIR", "./tmp")
+    output_raw = output_dir or setting(
+        "SESSION_TRUNCATION_OUTPUT_DIR", "~/Downloads"
+    )
+    tz_raw = timezone_name or setting("SESSION_TRUNCATION_TIMEZONE", "local")
 
     return Config(
         buffer_dir=_resolve_dir(buffer_raw, base_dir),
